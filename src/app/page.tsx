@@ -1,9 +1,51 @@
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { InquiryForm } from "@/components/inquiry-form";
 import { collection, formatPrice } from "@/lib/collection";
+import { CONTACT } from "@/lib/contact";
+
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "GOSPA Statuary Restoration Co.",
+  alternateName: "GOSPA Statuary",
+  url: "https://gospastatuary.com",
+  logo: "https://gospastatuary.com/statues/DJI_20260419121121_0019_D.webp",
+  description:
+    "Hand-restored Catholic devotional statuary, Sacred Hearts, crucifixes, reliquaries and religious art — offered for acquisition by Rita M. Shea, master restorer, fifty years at the bench.",
+  areaServed: { "@type": "Country", name: "United States" },
+  knowsAbout: [
+    "Catholic devotional statues",
+    "Sacred Heart of Jesus statues",
+    "Our Lady of Fátima",
+    "Our Lady of Lourdes",
+    "Our Lady of Mount Carmel",
+    "Infant of Prague",
+    "Santo Cristo de Limpias",
+    "St. Martin de Porres",
+    "reliquaries and monstrances",
+    "religious statue restoration",
+    "estatuas católicas restauradas",
+  ],
+  founder: { "@type": "Person", name: "Rita M. Shea" },
+  slogan: "In order for art to be a prayer, it must be of good quality.",
+  telephone: "+1-603-943-5952",
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+1-603-943-5952",
+    contactType: "sales",
+    areaServed: "US",
+    availableLanguage: ["English", "Spanish"],
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "NH",
+    addressCountry: "US",
+  },
+};
 
 export default function HomePage() {
   const hero = collection.find((p) => p.hero) ?? collection[0];
@@ -14,6 +56,13 @@ export default function HomePage() {
 
   return (
     <>
+      <Script
+        id="site-jsonld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+      >
+        {JSON.stringify(siteJsonLd)}
+      </Script>
       <Nav />
       <main className="flex-1">
         <Hero hero={hero} availableCount={availableCount} />
@@ -93,8 +142,8 @@ function Hero({
           <dl className="mt-14 grid grid-cols-3 max-w-xl gap-x-6 gap-y-2">
             {[
               [`${availableCount}`, "Pieces available now"],
-              ["U.S.", "Shipping, buyer pays S&H"],
-              ["By hand", "Restored, packed, sent"],
+              ["NH", "Pickup at the atelier"],
+              ["By hand", "Restored, offered, unhurried"],
             ].map(([k, v]) => (
               <div key={v}>
                 <dt className="font-display text-gild text-3xl md:text-4xl">
@@ -237,18 +286,18 @@ function Acquire() {
     },
     {
       k: "II",
-      t: "Inquire or reserve",
-      b: "Send a short note. Reserve a piece for 48 hours while we confirm, or ask Rita to quote shipping to your U.S. address.",
+      t: "Write to the atelier",
+      b: "Send a short note about the piece. Rita reads every inquiry herself; a family member helps coordinate atelier visit days so she is never receiving strangers alone.",
     },
     {
       k: "III",
-      t: "Rita replies",
-      b: "Within two working days you’ll have a total — piece plus shipping & handling — and instructions to settle by your preferred method.",
+      t: "Pickup or your shipper",
+      b: "Local buyers in New England drive to the atelier. Buyers outside the region arrange a white-glove carrier of their choice — we’ve had good experiences with Plycon, Ship Smart, and Craters & Freighters.",
     },
     {
       k: "IV",
-      t: "Packed & sent",
-      b: "Rita personally packs each piece. Larger statuary is crated. Tracking is provided; delivery is typically one to two weeks within the U.S.",
+      t: "Atelier handoff",
+      b: "On your scheduled day, you (or the carrier you hired) meet Rita at her New Hampshire atelier. Payment is settled before pickup. Rita never packs, never ships — the piece simply passes from her hands to yours.",
     },
   ];
   return (
@@ -268,12 +317,20 @@ function Acquire() {
               inquiry herself and replies personally.
             </p>
             <div className="mt-8 rounded-sm border border-gold/30 bg-ink/50 px-5 py-4">
-              <div className="section-label text-gold-hi/80">Shipping</div>
+              <div className="section-label text-gold-hi/80">Pickup &amp; shipping</div>
               <p className="font-serif text-ivory/80 text-sm mt-2 leading-relaxed">
-                U.S. destinations only. Shipping &amp; handling is quoted on
-                inquiry and paid by the buyer — itemized, honest, never marked
-                up.
+                {CONTACT.pickupNote}
               </p>
+              <div className="hairline mt-4 opacity-60" />
+              <a
+                href={CONTACT.phoneHref}
+                className="mt-4 flex items-baseline gap-3 group"
+              >
+                <span className="section-label text-gold-hi/80">Call Rita</span>
+                <span className="font-display text-gild text-lg tracking-[0.18em] group-hover:text-gold-hi">
+                  {CONTACT.phone}
+                </span>
+              </a>
               <p className="font-serif italic text-ivory/60 text-sm mt-3">
                 Consultas en español bienvenidas.
               </p>
@@ -560,11 +617,21 @@ function Contact() {
             <span className="text-gild">atelier.</span>
           </h2>
           <p className="font-serif text-ivory/80 text-lg mt-6 leading-relaxed">
-            Ask about a piece in the collection, reserve one for 48 hours, or
-            begin a restoration. Rita reads every letter herself and replies
-            within two working days.
+            Ask about a piece in the collection or begin a restoration. Rita
+            reads every letter herself and replies within two working days.
           </p>
-          <div className="hairline mt-10 max-w-xs opacity-70" />
+
+          <a
+            href={CONTACT.phoneHref}
+            className="mt-8 inline-flex flex-col group"
+          >
+            <span className="section-label text-gold-hi/80">Or call the atelier</span>
+            <span className="font-display text-gild text-3xl md:text-4xl tracking-[0.15em] mt-2 group-hover:text-gold-hi">
+              {CONTACT.phone}
+            </span>
+          </a>
+
+          <div className="hairline mt-8 max-w-xs opacity-70" />
           <p className="font-serif italic text-ivory/60 mt-6">
             &ldquo;A broken Virgin is not discarded. She is returned.&rdquo;
           </p>

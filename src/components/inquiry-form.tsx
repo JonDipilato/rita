@@ -218,10 +218,11 @@ export function InquiryForm({
         onLight ? "border-ink/15 bg-parchment/70 text-ink/75" : "border-gold/20 bg-ink/50 text-ivory/70"
       }`}>
         <strong className="font-display tracking-[0.18em] uppercase text-[0.62rem]">
-          U.S. shipping only ·
+          New Hampshire pickup ·
         </strong>{" "}
-        Shipping &amp; handling is quoted after inquiry and paid by the buyer.
-        Rita personally packs each piece for safe transport.{" "}
+        Local buyers come to the atelier by appointment. Out-of-region buyers
+        arrange a white-glove carrier directly — Rita hands the piece off at
+        the atelier on your scheduled day.{" "}
         <span className="italic opacity-90">Consultas en español bienvenidas.</span>
       </div>
 

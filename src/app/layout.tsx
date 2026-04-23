@@ -29,12 +29,26 @@ export const metadata: Metadata = {
     template: "%s · GOSPA Statuary Restoration",
   },
   description:
-    "Fifty years of sacred statue restoration by Rita M. Shea. Catholic devotional statues, religious relics, and liturgical art — restored by hand in the tradition of the cathedral ateliers.",
+    "Hand-restored Catholic devotional statuary offered by Rita M. Shea from her New Hampshire atelier — Madonnas, Sacred Hearts, saints, crucifixes, and reliquaries. Local pickup in New England or buyer-arranged shipping. Consultas en español bienvenidas.",
   metadataBase: new URL("https://gospastatuary.com"),
+  keywords: [
+    "Catholic statues for sale",
+    "restored Catholic statues",
+    "religious statues New Hampshire",
+    "Catholic statues New England",
+    "estatuas católicas restauradas",
+    "devotional statues",
+    "sacred art restoration",
+    "Our Lady of Fátima statue",
+    "Sacred Heart of Jesus statue",
+    "Infant of Prague statue",
+    "Santo Cristo de Limpias",
+    "religious antiques",
+  ],
   openGraph: {
     title: "GOSPA Statuary Restoration Co.",
     description:
-      "In order for art to be a prayer, it must be of good quality. — Fifty years of sacred statue restoration.",
+      "In order for art to be a prayer, it must be of good quality. — Hand-restored Catholic statuary from Rita M. Shea's New Hampshire atelier.",
     type: "website",
     images: ["/statues/DJI_20260419121121_0019_D.webp"],
   },

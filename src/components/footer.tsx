@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Crest } from "./crest";
+import { CONTACT } from "@/lib/contact";
 
 export function Footer() {
   return (
@@ -29,6 +30,7 @@ export function Footer() {
           <h4 className="section-label text-gold-hi/80">Explore</h4>
           <ul className="mt-5 space-y-3 font-serif text-ivory/80">
             <li><Link href="/collection" className="hover:text-gold-hi transition-colors">The Collection</Link></li>
+            <li><Link href="/coleccion" className="hover:text-gold-hi transition-colors italic">La Colección <span className="opacity-60">(español)</span></Link></li>
             <li><Link href="/#acquire" className="hover:text-gold-hi transition-colors">How to Acquire</Link></li>
             <li><Link href="/#rita" className="hover:text-gold-hi transition-colors">About Rita</Link></li>
             <li><Link href="/#restoration" className="hover:text-gold-hi transition-colors">Restoration</Link></li>
@@ -37,16 +39,27 @@ export function Footer() {
         </div>
 
         <div className="md:col-span-4">
-          <h4 className="section-label text-gold-hi/80">Shipping &amp; Inquiries</h4>
+          <h4 className="section-label text-gold-hi/80">Pickup &amp; Inquiries</h4>
           <div className="mt-5 font-serif text-ivory/80 space-y-2 leading-relaxed">
             <p>
-              U.S. shipping only. S&amp;H quoted on inquiry and paid by the
-              buyer. Rita personally packs each piece.
+              Local pickup at Rita&rsquo;s atelier in New Hampshire, by
+              appointment. Buyers outside the region arrange their own
+              white-glove carrier; Rita hands the piece off at the atelier.
             </p>
             <p className="italic text-ivory/60">
               Consultas en español bienvenidas.
             </p>
-            <p>Contact details being finalized — please use the inquiry form.</p>
+            <p>
+              <a
+                href={CONTACT.phoneHref}
+                className="text-gild hover:text-gold-hi font-display tracking-[0.18em] text-sm"
+              >
+                {CONTACT.phone}
+              </a>
+              <span className="block text-xs text-ivory/50 tracking-[0.18em] uppercase font-display mt-1">
+                Call the atelier · Rita M. Shea
+              </span>
+            </p>
           </div>
           <div className="mt-6 flex gap-3">
             <Link

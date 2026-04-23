@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { InquiryForm } from "@/components/inquiry-form";
+import { NotifyForm } from "@/components/notify-form";
 import { ProductGallery } from "./product-gallery";
 import {
   collection,
@@ -12,6 +14,7 @@ import {
   findBySlug,
   formatPrice,
 } from "@/lib/collection";
+import { CONTACT } from "@/lib/contact";
 
 export async function generateStaticParams() {
   return collection.map((p) => ({ slug: p.slug }));
@@ -25,10 +28,33 @@ export async function generateMetadata({
   const { slug } = await params;
   const piece = findBySlug(slug);
   if (!piece) return { title: "Not found" };
+  const canonical = `/collection/${piece.slug}`;
+  const keywordBase = [
+    piece.title,
+    piece.devotion,
+    piece.category,
+    categoriesES[piece.category],
+    "Catholic statue for sale",
+    "restored Catholic statue",
+    "estatua católica",
+    "estatua religiosa restaurada",
+    "devotional statue",
+    "religious art",
+  ].filter(Boolean) as string[];
   return {
     title: piece.title,
     description: piece.description,
+    alternates: { canonical },
+    keywords: keywordBase,
     openGraph: {
+      title: piece.title,
+      description: piece.description,
+      type: "website",
+      url: canonical,
+      images: piece.images.slice(0, 1),
+    },
+    twitter: {
+      card: "summary_large_image",
       title: piece.title,
       description: piece.description,
       images: piece.images.slice(0, 1),
@@ -53,8 +79,44 @@ export default async function PiecePage({
 
   const available = piece.status === "Available";
 
+  const base = "https://gospastatuary.com";
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: piece.title,
+    description: piece.description,
+    image: piece.images.map((src) => `${base}${src}`),
+    sku: piece.slug,
+    category: piece.category,
+    brand: { "@type": "Brand", name: "GOSPA Statuary Restoration Co." },
+    ...(piece.price != null && {
+      offers: {
+        "@type": "Offer",
+        url: `${base}/collection/${piece.slug}`,
+        priceCurrency: "USD",
+        price: piece.price,
+        availability:
+          piece.status === "Available"
+            ? "https://schema.org/InStock"
+            : piece.status === "Reserved"
+              ? "https://schema.org/LimitedAvailability"
+              : "https://schema.org/SoldOut",
+        itemCondition: "https://schema.org/RefurbishedCondition",
+        seller: { "@type": "Organization", name: "GOSPA Statuary Restoration Co." },
+        areaServed: "US",
+      },
+    }),
+  };
+
   return (
     <>
+      <Script
+        id={`product-jsonld-${piece.slug}`}
+        type="application/ld+json"
+        strategy="beforeInteractive"
+      >
+        {JSON.stringify(productJsonLd)}
+      </Script>
       <Nav />
       <main className="flex-1 pt-32 pb-8 bg-parchment">
         <nav className="mx-auto max-w-7xl px-6 text-sm text-ink/60 font-serif flex gap-2 items-center">
@@ -130,10 +192,8 @@ export default async function PiecePage({
             </dl>
 
             <div className="mt-8 rounded-sm border border-gold/30 bg-ivory/60 px-5 py-4 text-sm font-serif text-ink/80 leading-relaxed">
-              <div className="section-label mb-1">Shipping &amp; handling</div>
-              U.S. destinations only. Shipping &amp; handling is quoted on inquiry
-              and paid by the buyer. Rita personally packs each piece; larger
-              statuary is crated.
+              <div className="section-label mb-1">Pickup &amp; shipping</div>
+              {CONTACT.pickupNote}
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -144,78 +204,67 @@ export default async function PiecePage({
                   available ? "" : "pointer-events-none opacity-50"
                 }`}
               >
-                {available ? "Acquire this Piece" : piece.status}
+                {available ? "Write to Rita about this Piece" : piece.status}
               </a>
               {available && (
                 <a
-                  href="#reserve"
-                  className="font-display text-[0.72rem] tracking-[0.28em] uppercase text-ink border border-ink/20 hover:border-gold-deep px-6 py-4 rounded-sm"
+                  href={CONTACT.phoneHref}
+                  className="font-display text-[0.72rem] tracking-[0.28em] uppercase text-ink border border-ink/20 hover:border-gold-deep px-6 py-4 rounded-sm inline-flex items-center gap-3"
                 >
-                  Reserve for 48 Hours
+                  <span>Call Rita</span>
+                  <span className="text-gold-deep tracking-[0.15em]">
+                    {CONTACT.phone}
+                  </span>
                 </a>
               )}
             </div>
+
+            {!available && (
+              <div className="mt-8">
+                <NotifyForm piece={piece.title} pieceSlug={piece.slug} tone="light" />
+              </div>
+            )}
           </aside>
         </article>
 
         {available && (
-          <>
-            <section
-              id="inquire"
-              className="bg-ink text-ivory mt-24"
-            >
-              <div className="mx-auto max-w-6xl px-6 py-20 grid lg:grid-cols-12 gap-12">
-                <div className="lg:col-span-5">
-                  <div className="section-label text-gold-hi/80">Acquire</div>
-                  <h2 className="font-display mt-5 text-4xl leading-tight">
-                    Bring{" "}
-                    <span className="italic font-serif font-normal">
-                      {piece.title}
-                    </span>{" "}
-                    <span className="text-gild">home.</span>
-                  </h2>
-                  <p className="font-serif text-ivory/80 text-lg mt-6 leading-relaxed">
-                    Fill in your details and Rita will reply personally within
-                    two working days with a total that includes shipping &amp;
-                    handling to your U.S. address.
-                  </p>
-                </div>
-                <div className="lg:col-span-7">
-                  <InquiryForm
-                    intent="acquire"
-                    piece={piece.title}
-                    pieceSlug={piece.slug}
-                    tone="dark"
-                  />
-                </div>
-              </div>
-            </section>
-
-            <section
-              id="reserve"
-              className="bg-parchment text-ink"
-            >
-              <div className="mx-auto max-w-4xl px-6 py-20">
-                <div className="section-label">Reserve</div>
-                <h2 className="font-display mt-5 text-3xl md:text-4xl leading-tight">
-                  Hold {piece.title} for 48 hours.
+          <section id="inquire" className="bg-ink text-ivory mt-24">
+            <div className="mx-auto max-w-6xl px-6 py-20 grid lg:grid-cols-12 gap-12">
+              <div className="lg:col-span-5">
+                <div className="section-label text-gold-hi/80">Acquire</div>
+                <h2 className="font-display mt-5 text-4xl leading-tight">
+                  Bring{" "}
+                  <span className="italic font-serif font-normal">
+                    {piece.title}
+                  </span>{" "}
+                  <span className="text-gild">home.</span>
                 </h2>
-                <p className="font-serif text-ink/75 text-lg mt-4 leading-relaxed">
-                  A reservation gives you two working days to confirm. If Rita
-                  hears nothing within 48 hours the piece returns to the
-                  available collection — no obligation.
+                <p className="font-serif text-ivory/80 text-lg mt-6 leading-relaxed">
+                  Write a short note about yourself and your interest. Rita
+                  replies personally within two working days and — together
+                  with a family member — coordinates an atelier visit day for
+                  pickup or carrier handoff.
                 </p>
-                <div className="mt-8">
-                  <InquiryForm
-                    intent="reserve"
-                    piece={piece.title}
-                    pieceSlug={piece.slug}
-                    tone="light"
-                  />
+                <div className="mt-6 rounded-sm border border-gold/30 bg-ink/60 px-5 py-4">
+                  <div className="section-label text-gold-hi/80">How it works</div>
+                  <ul className="font-serif text-ivory/80 text-sm mt-3 leading-relaxed list-disc pl-5 space-y-1.5">
+                    <li>Local buyers drive to the New Hampshire atelier.</li>
+                    <li>Out-of-region buyers hire a white-glove shipper directly — Plycon, Ship Smart, or Craters &amp; Freighters work well.</li>
+                    <li>Rita never packs or ships — the piece passes from her hands to you or your carrier at the atelier.</li>
+                    <li>Payment is settled before pickup.</li>
+                  </ul>
                 </div>
               </div>
-            </section>
-          </>
+              <div className="lg:col-span-7">
+                <InquiryForm
+                  intent="acquire"
+                  piece={piece.title}
+                  pieceSlug={piece.slug}
+                  tone="dark"
+                />
+              </div>
+            </div>
+          </section>
         )}
 
         {related.length > 0 && (
