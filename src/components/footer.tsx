@@ -72,9 +72,20 @@ export function Footer() {
         </div>
       </div>
       <div className="hairline opacity-50" />
-      <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-ivory/50 font-display tracking-[0.22em] uppercase">
+      <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs text-ivory/50 font-display tracking-[0.22em] uppercase">
         <span>© {new Date().getFullYear()} GOSPA Statuary Restoration Co.</span>
-        <span>Sacred art, restored by hand.</span>
+        <span className="hidden md:inline">Sacred art, restored by hand.</span>
+        <span>
+          Site by{" "}
+          <a
+            href="https://dipilatoautomations.com"
+            target="_blank"
+            rel="noopener"
+            className="text-ivory/70 hover:text-gold-hi transition-colors"
+          >
+            DiPilato Automations
+          </a>
+        </span>
       </div>
     </footer>
   );
