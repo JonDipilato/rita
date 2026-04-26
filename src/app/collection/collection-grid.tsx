@@ -101,7 +101,7 @@ export function CollectionGrid({ pieces }: { pieces: Piece[] }) {
                     alt={p.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04]"
+                    className="object-cover object-top transition-transform duration-[1200ms] group-hover:scale-[1.04]"
                   />
                 </div>
               </div>

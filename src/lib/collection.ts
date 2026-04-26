@@ -2,8 +2,7 @@ export type Category =
   | "Blessed Mother"
   | "Sacred Heart"
   | "Saints & Infant Jesus"
-  | "Crucifix & Passion"
-  | "Reliquaries & Sacred Objects";
+  | "Crucifix & Passion";
 
 export type Status = "Available" | "Reserved" | "Sold";
 
@@ -131,30 +130,6 @@ export const collection: Piece[] = [
     featured: true,
   },
   {
-    slug: "sacred-heart-of-jesus-rose",
-    title: "Sacred Heart of Jesus — Rose Mantle",
-    devotion: "Sacred Heart of Jesus",
-    category: "Sacred Heart",
-    status: "Available",
-    era: "Vintage, restored",
-    medium: "Plaster with polychromy, gilt hem, crimson mantle",
-    height: "Approx. 32 inches",
-    provenance:
-      "A classical Sacred Heart with raised hand and the visible flame of the Heart. The crimson-rose mantle is edged in gold, the emerald under-lining restored, the stigmata painted with careful understatement.",
-    condition: "Restored by Rita M. Shea",
-    description:
-      "A commanding Sacred Heart fit for a main devotion altar. The flesh-tones are hand-glazed; the crown of thorns on the Heart is shaded in red and gold; the hem and sleeve cuffs are re-gilded. A companion piece for any home with a standing Our Lady.",
-    highlights: [
-      "Crimson mantle edged in gold",
-      "Hand-shaded Heart with traditional thorns",
-      "Emerald lining restored",
-      "Pairs with any standard Madonna",
-    ],
-    images: [img("DJI_20260419122133_0031_D"), img("DJI_20260419122148_0033_D")],
-    thumb: thumb("DJI_20260419122133_0031_D"),
-    featured: true,
-  },
-  {
     slug: "sacred-heart-of-jesus-classical",
     title: "Sacred Heart of Jesus — Classical Palette",
     devotion: "Sacred Heart of Jesus",
@@ -248,49 +223,6 @@ export const collection: Piece[] = [
     thumb: thumb("DJI_20260419122833_0054_D"),
     featured: true,
   },
-  {
-    slug: "reliquary-monstrance",
-    title: "Reliquary Monstrance",
-    devotion: "Reliquary",
-    category: "Reliquaries & Sacred Objects",
-    status: "Available",
-    era: "Vintage brass, polished",
-    medium: "Solid brass sunburst-cross monstrance with sealed relic capsule",
-    height: "Approx. 11 inches",
-    provenance:
-      "A classical sunburst-cross monstrance of solid brass. The relic capsule is original and sealed — documentation to be transferred with the piece (please inquire). Polished and relined.",
-    condition: "Polished, relined; seal intact",
-    description:
-      "Paired in the atelier photographs with a Holy Bible and sanctuary candle — a private-altar companion piece. Polished to the soft honey of old brass, not to a mirror. Suitable for a home oratory or a small chapel.",
-    highlights: [
-      "Solid brass sunburst",
-      "Original sealed relic capsule",
-      "Polished to a soft antique finish",
-      "Documentation transferable on inquiry",
-    ],
-    images: [img("DJI_20260419121323_0029_D"), img("DJI_20260419121312_0028_D")],
-    thumb: thumb("DJI_20260419121323_0029_D"),
-  },
-  {
-    slug: "sanctuary-candle-set",
-    title: "Sanctuary Candle Set with Pierced-Brass Sleeves",
-    category: "Reliquaries & Sacred Objects",
-    status: "Available",
-    era: "Hand-finished",
-    medium: "Beeswax candles with pierced brass and cut-metal sleeves",
-    provenance:
-      "A set of sanctuary-style candles in traditional devotional colors — evergreen, crimson, and deep green — seated in pierced-brass gothic sleeves. Suited to flanking a private altar or a Marian niche.",
-    condition: "Hand-finished",
-    description:
-      "Quiet, beautiful, functional — the kind of small objects that make a family altar feel lit by something more than electricity.",
-    highlights: [
-      "Three candles, three pierced-brass sleeves",
-      "Devotional color set",
-      "Altar-ready",
-    ],
-    images: [img("DJI_20260419123504_0066_D")],
-    thumb: thumb("DJI_20260419123504_0066_D"),
-  },
 ];
 
 export const categories: Category[] = [
@@ -298,7 +230,6 @@ export const categories: Category[] = [
   "Sacred Heart",
   "Saints & Infant Jesus",
   "Crucifix & Passion",
-  "Reliquaries & Sacred Objects",
 ];
 
 export const categoriesES: Record<Category, string> = {
@@ -306,7 +237,6 @@ export const categoriesES: Record<Category, string> = {
   "Sacred Heart": "Sagrado Corazón",
   "Saints & Infant Jesus": "Santos y Niño Jesús",
   "Crucifix & Passion": "Crucifijos y la Pasión",
-  "Reliquaries & Sacred Objects": "Relicarios y objetos sagrados",
 };
 
 export function formatPrice(p?: number) {

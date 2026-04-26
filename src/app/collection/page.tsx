@@ -8,7 +8,7 @@ import { collection } from "@/lib/collection";
 export const metadata: Metadata = {
   title: "The Collection",
   description:
-    "Sacred statuary and religious art, restored and offered for sale by Rita M. Shea. Virgin Mary, Sacred Heart, the Infant of Prague, saints, reliquaries and more — all hand-restored, U.S. shipping.",
+    "Antique Catholic statuary rescued, restored, and offered by Rita M. Shea — Virgin Mary, Sacred Heart, Infant of Prague, saints, and crucifixes. For families, parishes, and churches. Pickup at her New Hampshire atelier.",
 };
 
 export default function CollectionPage() {
@@ -26,10 +26,10 @@ export default function CollectionPage() {
             <span className="text-gild italic font-serif">offered for acquisition.</span>
           </h1>
           <p className="font-serif text-ink/75 text-lg md:text-xl mt-6 max-w-2xl mx-auto leading-relaxed">
-            Each piece below is from Rita&apos;s studio — personally restored and
-            ready for a home, parish, or private chapel. {count} pieces currently
-            available. Shipping &amp; handling within the continental U.S. is paid
-            by the buyer and quoted on inquiry.
+            Antique statuary rescued from old shops, restored by hand, and
+            offered for families, parishes, and churches. {count} pieces
+            currently available. Pickup at Rita&apos;s atelier in New Hampshire;
+            buyers outside the region arrange their own white-glove carrier.
           </p>
           <p className="font-serif italic text-ink/50 text-base mt-3">
             Consultas en español bienvenidas.

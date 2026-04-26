@@ -15,7 +15,7 @@ const siteJsonLd = {
   url: "https://gospastatuary.com",
   logo: "https://gospastatuary.com/statues/DJI_20260419121121_0019_D.webp",
   description:
-    "Hand-restored Catholic devotional statuary, Sacred Hearts, crucifixes, reliquaries and religious art — offered for acquisition by Rita M. Shea, master restorer, fifty years at the bench.",
+    "Hand-restored Catholic devotional statuary — Madonnas, Sacred Hearts, saints and crucifixes rescued from old shops and restored by Rita M. Shea, master restorer, fifty years at the bench. For families, parishes, and churches.",
   areaServed: { "@type": "Country", name: "United States" },
   knowsAbout: [
     "Catholic devotional statues",
@@ -26,7 +26,7 @@ const siteJsonLd = {
     "Infant of Prague",
     "Santo Cristo de Limpias",
     "St. Martin de Porres",
-    "reliquaries and monstrances",
+    "rescued antique Catholic statues",
     "religious statue restoration",
     "estatuas católicas restauradas",
   ],
@@ -119,9 +119,9 @@ function Hero({
           </h1>
 
           <p className="font-serif text-xl md:text-2xl text-ivory/85 mt-8 leading-relaxed max-w-2xl">
-            A private collection of Madonnas, Sacred Hearts, saints, crucifixes
-            and reliquaries — each one hand-restored in Rita&rsquo;s atelier and
-            ready to preside over a home altar, family shrine, or parish niche.
+            A private collection of Madonnas, Sacred Hearts, saints and crucifixes
+            — rescued from old shops and saved by hand — ready to preside over a
+            home altar, family shrine, or parish sanctuary.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -249,7 +249,7 @@ function Featured({ featured }: { featured: (typeof collection)[number][] }) {
                       alt={p.title}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04]"
+                      className="object-cover object-top transition-transform duration-[1200ms] group-hover:scale-[1.04]"
                     />
                   </div>
                 </div>
@@ -396,10 +396,10 @@ function Devotion() {
         "The Peruvian lay-brother and patron of those who sweep, cook, and serve — a saint beloved in homes across the Americas.",
     },
     {
-      es: "Relicarios",
-      en: "Reliquaries & sacred objects",
+      es: "Para parroquias e iglesias",
+      en: "Parish & Church",
       body:
-        "Monstrances, pierced-brass candle sleeves, sanctuary pieces — the smaller sacred things that quietly finish an altar.",
+        "Parishes, chapels, and convents are welcomed. Churches that handle their own facilities and transport collect directly from the atelier — no special arrangement needed.",
     },
   ];
 
@@ -417,9 +417,10 @@ function Devotion() {
           </h2>
           <p className="font-serif text-ink/75 text-lg mt-6 leading-relaxed">
             Rita’s collection serves the devotions carried across generations —
-            in Irish, Italian, Portuguese, Filipino, and Latin American
-            Catholic households alike. Every piece that leaves the atelier is
-            finished the way a grandmother would recognize.
+            in Irish, Italian, Portuguese, Filipino, and Latin American Catholic
+            households alike. Many pieces were rescued from old shops and private
+            attics; all leave the atelier finished the way a grandmother would
+            recognize, and ready to be passed down again.
           </p>
         </div>
 
@@ -509,16 +510,16 @@ function Rita() {
           <div className="frame-gilt">
             <div className="relative aspect-[4/5] overflow-hidden bg-ink">
               <Image
-                src="/statues/DJI_20260419121121_0019_D.webp"
-                alt="From the atelier of Rita M. Shea"
+                src="/rita-portrait.webp"
+                alt="Rita M. Shea with a cathedral-scale Sacred Heart, her atelier"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
+                className="object-cover object-top"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/50 to-transparent p-6">
-                <div className="section-label text-gold-hi/80">The Atelier</div>
+                <div className="section-label text-gold-hi/80">Rita M. Shea</div>
                 <div className="font-serif italic text-ivory text-lg mt-1">
-                  Where the hands still know the way.
+                  Fifty years at the bench — still at work.
                 </div>
               </div>
             </div>
@@ -572,19 +573,44 @@ function Restoration() {
           </div>
         </div>
 
-        <ul className="lg:col-span-5 space-y-5 border-l border-gold/30 pl-6">
-          {[
-            ["Assessment", "Examined for structural integrity, paint history, and age."],
-            ["Conservation", "Fractures stabilized, missing elements rebuilt — reversibly."],
-            ["Polychromy", "Flesh-tones and mantles in layered hand-mixed glazes."],
-            ["Gilding", "22K gold leaf on crowns, halos, and embroidered hems."],
-          ].map(([t, b]) => (
-            <li key={t}>
-              <div className="section-label">{t}</div>
-              <p className="font-serif text-ink/80 mt-1 leading-relaxed">{b}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="lg:col-span-5 space-y-6">
+          <ul className="space-y-5 border-l border-gold/30 pl-6">
+            {[
+              ["Assessment", "Examined for structural integrity, paint history, and age."],
+              ["Conservation", "Fractures stabilized, missing elements rebuilt — reversibly."],
+              ["Polychromy", "Flesh-tones and mantles in layered hand-mixed glazes."],
+              ["Gilding", "22K gold leaf on crowns, halos, and embroidered hems."],
+            ].map(([t, b]) => (
+              <li key={t}>
+                <div className="section-label">{t}</div>
+                <p className="font-serif text-ink/80 mt-1 leading-relaxed">{b}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="grid grid-cols-2 gap-3 mt-6">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-sm border border-gold/20">
+              <Image
+                src="/before-after-lourdes.webp"
+                alt="Our Lady of Lourdes — before and after restoration by Rita M. Shea, St. Joseph the Worker Shrine"
+                fill
+                sizes="(max-width: 1024px) 50vw, 25vw"
+                className="object-cover object-top"
+              />
+            </div>
+            <div className="relative aspect-[3/4] overflow-hidden rounded-sm border border-gold/20">
+              <Image
+                src="/before-after-st-patrick.webp"
+                alt="St. Patrick — before and after restoration by Rita M. Shea, St. Joseph the Worker Shrine, Lowell MA"
+                fill
+                sizes="(max-width: 1024px) 50vw, 25vw"
+                className="object-cover object-top"
+              />
+            </div>
+            <p className="col-span-2 font-serif italic text-ink/50 text-xs text-center">
+              Our Lady of Lourdes &amp; St. Patrick — restored for St. Joseph the Worker Shrine, Lowell, MA
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
